@@ -2964,7 +2964,7 @@ def Comparaison_des_phases_de_traitement(t,data,date1,date2,graphique):
     else:
         st.markdown(f"<h3 style='text-align: center;'>Variation de {title[:4]} pendant les phases séléctionner</h3>", unsafe_allow_html=True)        
         fig = px.line(df1,x="date",y=df1.columns[1:])
-        fig.update_traces(line=dict(color='#095DBA'), selector=dict(name=df1.columns[1]))
+        fig.update_traces(line=dict(color='#00A8CC'), selector=dict(name=df1.columns[1]))
         fig.update_traces(line=dict(color='#FF4B4A'), selector=dict(name=df1.columns[2]))
         st.plotly_chart(fig,use_container_width=True,height = 200)
      
@@ -2979,7 +2979,7 @@ def Comparaison_des_phases_de_traitement(t,data,date1,date2,graphique):
         if graphique == "Graphique à barres":
             # selected_color = st.color_picker(f'Choisissez une couleur', '#FF4B4A')
             st.markdown(f"<h3 style='text-align: center;'>Pourcentage d'élémination moyenne de {title[:4]} :{np.round(df1['Pourcentage'].mean(),2)}  %</h3>", unsafe_allow_html=True)        
-            fig = px.bar(df1,x="date",y="Pourcentage",color_discrete_sequence=['#FF4B4A'],height = 450)
+            fig = px.bar(df1,x="date",y="Pourcentage",color_discrete_sequence=['#00A8CC'],height = 450)
             fig.update_traces(text=df1["Pourcentage"], textposition='outside')
             st.plotly_chart(fig,use_container_width=True)
         elif graphique == "Graphique en lignes":

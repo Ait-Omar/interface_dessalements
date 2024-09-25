@@ -10,16 +10,19 @@ from fonctions import Visualisation_des_paramètres,Comparaison_des_phases_de_tr
 from fonctions import labo_oper,labo_oper1,labo_oper2,vis_op,compare_op,compar_unity_op,visualisation_volume,visualisation_volume_op,send_notification
 #--------------------------------------------------heradr-------------------------------------------------------------
 st.markdown(f"<h1 style='text-align: center'>Productions</h1>", unsafe_allow_html=True)
-
+    
+# df = pd.read_excel('data/Copie de Résultat de Production et TRG - Eau Dessalement Mobile et Fixe au   25 08 2024.xlsb .xlsx',sheet_name="Volume")
+df = st.sidebar.file_uploader("Charger les données du rapport de production", type=["xlsx", "xls"])
+if df is None:
+    st.sidebar.info("Upload a file through config")
+    st.stop()
 don = st.sidebar.radio('Visualisation:',
                             [
                                 "Volume produit (m3)",
                                 "Volume & Paramètres de marche",
-                                ])      
-df = pd.read_excel('data/Copie de Résultat de Production et TRG - Eau Dessalement Mobile et Fixe au   25 08 2024.xlsb .xlsx',sheet_name="Volume")
-
+                                ])  
 if don == "Volume produit (m3)":
-    df = pd.read_excel('data/Copie de Résultat de Production et TRG - Eau Dessalement Mobile et Fixe au   25 08 2024.xlsb .xlsx',sheet_name="Volume")
+    df = pd.read_excel(df,sheet_name="Volume")
     col1,col2 = st.columns((2))
 
     startDate = pd.to_datetime(df["Date"]).min()
@@ -33,7 +36,7 @@ if don == "Volume produit (m3)":
     if st.sidebar.button("Aply"):
         visualisation_volume(df,date1,date2)
 elif don == "Volume & Paramètres de marche":
-    df = pd.read_excel('data/Copie de Résultat de Production et TRG - Eau Dessalement Mobile et Fixe au   25 08 2024.xlsb .xlsx',sheet_name="Volume")
+    df = pd.read_excel(df,sheet_name="Volume")
     data_opertionel={}
     unity_to_compare = st.sidebar.radio('Unité:',
                                     [

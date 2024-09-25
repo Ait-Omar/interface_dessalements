@@ -12,14 +12,14 @@ from fonctions import labo_oper,labo_oper1,labo_oper2,vis_op,compare_op,compar_u
 
 st.markdown(f"<h1 style='text-align: center'>Suivi des analyses laboratoires</h1>", unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("Choisissez un fichier Excel", type=["xlsx", "xls"])
+uploaded_file = st.sidebar.file_uploader("Charger les données laboratoires", type=["xlsx", "xls"])
 
 #---------------------------------------------Chargement des données-----------------------------------------------------
 if uploaded_file is None:
-    st.info("Upload a file through config")
+    st.sidebar.info("Upload a file through config")
     st.stop()
 
-st.markdown("<p style='text-align: center;'>Fichier téléchargé avec succès!</p>",unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align: center;'>Fichier téléchargé avec succès!</p>",unsafe_allow_html=True)
 sheets =["QT_intake","QT_PERMEAT FILTRATION","QT_APRES FILTRES A CARTOUCHE","QT_PERMEAT RO","QT_sortie_global",
     "ESLI_intake","ESLI_PERMEAT FILTRATION", "ESLI_APRES FILTRES A CARTOUCHE","ESLI_PERMEAT RO",
     "ION_intake","ION_PERMEAT FILTRATION","ION_Bac_stockage","ION_APRES FILTRES A CARTOUCHE","ION_PERMEAT RO",

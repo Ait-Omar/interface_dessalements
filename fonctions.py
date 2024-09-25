@@ -12,7 +12,7 @@ from email.message import EmailMessage
 import plotly.io as pio
 
 def Visualisation_des_paramètres(df,unity,phase,date1,date2): 
-    #filtrage selon l'unité QT
+
     if (unity == "QT") & (phase =="intake"):
         df = pd.read_excel(df,sheet_name="QT_intake")
         col1,col2 = st.columns((2))
@@ -25,6 +25,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df['TOC (mg/l)'] = df['TOC (mg/l)'].astype(float)
         df.loc[df['TOC (mg/l)'] < 3, 'TOC (mg/l)'] = 1
         df.loc[df['TOC (mg/l)'] > 3, 'TOC (mg/l)'] = 0
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Cond. (mS/cm) à 25° C moyen: {np.around(df['Cond. (mS/cm) à 25° C'].mean(),2)}</h2>", unsafe_allow_html=True)        
             fig = px.line(df,x="date",y="Cond. (mS/cm) à 25° C")
@@ -47,37 +48,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
                     ay=-40  
                 )
             st.plotly_chart(fig,use_container_width=True,height = 200)
-            with open('config.json') as json_file:
-                gmail_cfg = json.load(json_file)
-            seuil_po43 = 0.1
-
-            # Vérification de la dernière valeur de PO43-
-            valeur_actuelle_po43 =df['PO43- (mg/l)'].iloc[-1]
-
-            if valeur_actuelle_po43 > seuil_po43:
-                # Sauvegarde le graphique comme image
-                pio.write_image(fig, 'graph_PO43.png')
-
-                # Création du message e-mail
-                msg = EmailMessage()
-                msg['To'] = "lightupyourhome03@gmail.com"
-                msg['From'] = gmail_cfg['email']
-                msg['Subject'] = "Alerte PO43- Dépassement du Seuil"
-                msg.set_content(f'La valeur de PO43- (mg/l) est de {valeur_actuelle_po43} et a dépassé le seuil de 0.1. Voir le graphique ci-joint.')
-
-                # Ajout de l'image en pièce jointe
-                with open('graph_PO43.png', 'rb') as f:
-                    file_data = f.read()
-                    file_name = f.name
-                    msg.add_attachment(file_data, maintype='image', subtype='png', filename=file_name)
-
-                # Envoi de l'e-mail
-                with smtplib.SMTP_SSL(gmail_cfg['serveur'], gmail_cfg['port']) as smtp:
-                    smtp.login(gmail_cfg['email'], gmail_cfg['pwd'])
-                    smtp.send_message(msg)
-                    print("Notification envoyée avec succès avec le graphique !")
-            else:
-                print("La valeur actuelle de PO43- est inférieure ou égale au seuil. Aucune notification envoyée.")
+            
         with col2:
             st.markdown(f"<h2 style='text-align: center;'>SiO2 (mg/l) moyen: {np.around(df['SiO2 (mg/l)'].mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y="SiO2 (mg/l)")
@@ -3285,6 +3256,7 @@ def compar_unity_op(data,unity,phase,params,date1,date2):
         for i in range(len(params[k])):
             df1[f"{params[k][i]}---{k}"] = df[k][params[k][i]]                       
     df1 = pd.DataFrame(df1)
+    
     st.markdown(f"<h3 style='text-align: center;'>Variation de {df1.columns[1][:6]} dans les unitées séléctionnées</h3>", unsafe_allow_html=True)        
     fig = px.line(df1,x="date",y=df1.columns[1:],height = 400)
     st.plotly_chart(fig, use_container_width=True) 
@@ -3293,14 +3265,16 @@ def compar_unity_op(data,unity,phase,params,date1,date2):
     fig = px.bar(df1,x="date",y=df1.columns[1:])
     st.plotly_chart(fig,use_container_width=True,height = 200)
 def visualisation_volume(df,date1,date2):
+    col1, col2 = st.columns((2))
     df = df[(df["Date"] >= date1) & (df["Date"] <= date2)]
-    st.markdown(f"<h2 style='text-align: center;'>Volume Produit de chaque unitée en m3</h2>", unsafe_allow_html=True)        
-    fig1 = px.line(df,x="Date",y=df.columns[1:df.shape[1]-1])
-    st.plotly_chart(fig1,use_container_width=True,height = 200)
-    
-    st.markdown(f"<h2 style='text-align: center;'>Volume Total en m3</h2>", unsafe_allow_html=True)        
-    fig2 = px.line(df,x="Date",y=df.columns[-1])
-    st.plotly_chart(fig2,use_container_width=True,height = 200)
+    with col1:
+        st.markdown(f"<h2 style='text-align: center;'>Volume Produit de chaque unitée en m3</h2>", unsafe_allow_html=True)        
+        fig1 = px.line(df,x="Date",y=df.columns[1:df.shape[1]-1])
+        st.plotly_chart(fig1,use_container_width=True,height = 400)
+    with col2:
+        st.markdown(f"<h2 style='text-align: center;'>Volume Total en m3</h2>", unsafe_allow_html=True)        
+        fig2 = px.line(df,x="Date",y=df.columns[-1])
+        st.plotly_chart(fig2,use_container_width=True,height = 200)
     # st.markdown(f"<h2 style='text-align: center;'>Volume Produit de {df.columns[1]} en m3</h2>", unsafe_allow_html=True)        
     # fig = px.line(df, x="Date", y=df.columns[1], text=df[df.columns[1]])
     # fig.update_traces(mode='lines+markers+text', textposition='top right')

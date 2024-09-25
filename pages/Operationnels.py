@@ -15,21 +15,18 @@ from fonctions import labo_oper,labo_oper1,labo_oper2,vis_op,compare_op,compar_u
 st.title("Pramètres de marche")
 
 #---------------------------------------------Chargement des données-----------------------------------------------------
-
-
 don1 = st.sidebar.radio('Visualisation:',
-                            [
-                                "Visualisation des paramètres",
-                                "Comparaison des phases de traitement",
-                                "Comparaison des unitées"
-                                ])       
+                                [
+                                    "Visualisation des paramètres",
+                                    "Comparaison des phases de traitement",
+                                    "Comparaison des unitées"
+                                    ])       
 if don1 == "Visualisation des paramètres":
     unity = st.sidebar.radio('Unité:',
                                     [
                                         "QT",
                                         "ESLI",
-                                        "MCT",
-                                        "ION"])
+                                        "MCT"])
     data_opertionel = {}
     try:
         if (unity == "MCT"):
@@ -52,13 +49,7 @@ if don1 == "Visualisation des paramètres":
             phase = st.sidebar.radio('Phase:',
                                     ["UF","FC","RO ZONE A","RO ZONE B","RO ZONE C"])
             df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name="UF")
-        elif(unity == "ION"):
-            sheets =["HMMF","RO"]
-            for sheet in sheets:
-                data_opertionel[sheet] = pd.read_excel('data/SUIVI HMMF RO ION EXCHANGE standart.xlsx',sheet_name=sheet)
-            phase = st.sidebar.radio('Phase:',
-                                    ["HMMF","RO"])
-            df = pd.read_excel('data/SUIVI HMMF RO ION EXCHANGE standart.xlsx',sheet_name="RO")
+        
 
         col1,col2 = st.columns((2))
 
@@ -84,13 +75,13 @@ elif  don1 == "Comparaison des phases de traitement":
     data_opertionel = {}
     try:
         if (unity == "MCT"):
-            data_opertionel["tr"] = pd.read_excel('data/SUIVI DP et Q et CIP des RO  MCT 27-08-2024.xlsx',sheet_name="tr")
+            data_opertionel["tr"] = pd.read_excel('data/SUIVI DP et Q et CIP des RO  MCT.xlsx',sheet_name="tr")
             phase = st.sidebar.multiselect('Phase:',
                                     ["tr"])
         elif  (unity == "QT"):
             sheets =["UF","FC","RO"]
             for sheet in sheets:
-                data_opertionel[sheet] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT 27-08-2024.xlsx',sheet_name=sheet)
+                data_opertionel[sheet] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT.xlsx',sheet_name=sheet)
             phase = st.sidebar.multiselect('Phase:',
                                     ["UF","FC","RO"]
                                     )
@@ -124,4 +115,53 @@ elif  don1 == "Comparaison des phases de traitement":
         if st.sidebar.button("Apply"):
             compare_op(data_opertionel,phase,param_to_compare,date1,date2) 
     except Exception as e:
-            st.markdown(f"<h3 style='text-align: center;color:red;'></h3>", unsafe_allow_html=True)                    
+            st.markdown(f"<h3 style='text-align: center;color:red;'></h3>", unsafe_allow_html=True)                        
+else:
+    unity_to_compare = st.sidebar.multiselect('Unité:',
+                            [
+                                "QT",
+                                "ESLI",
+                                "MCT"])
+    try:
+        data_opertionel={}
+        phase_traitement = {}
+        paramètre = {}
+        for i in range(len(unity_to_compare)):
+            if unity_to_compare[i]  == "MCT":
+                data_opertionel[f"{unity_to_compare[i]}_tr"] = pd.read_excel('data/SUIVI DP et Q et CIP des RO  MCT.xlsx',sheet_name="tr")
+                phase_traitement[f"{unity_to_compare[i]}"] = st.sidebar.radio(f"phases de {unity_to_compare[i]}",
+                                    [
+                                    "tr"
+                                ])
+            elif unity_to_compare[i]  == "QT":
+                sheets =["UF","FC","RO"]
+                for sheet in sheets:
+                    data_opertionel[f"{unity_to_compare[i]}_{sheet}"] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT.xlsx',sheet_name=sheet)
+                phase_traitement[f"{unity_to_compare[i]}"] = st.sidebar.radio(f"phases de {unity_to_compare[i]}",
+                                    ["UF","FC","RO"])
+            else:
+                sheets =["UF","FC","RO ZONE A","RO ZONE B","RO ZONE C"]
+                for sheet in sheets:
+                        data_opertionel[f"{unity_to_compare[i]}_{sheet}"] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name=sheet)
+                phase_traitement[f"{unity_to_compare[i]}"] = st.sidebar.radio(f"phases de {unity_to_compare[i]}",
+                                    [
+                                    "UF","FC","RO ZONE A","RO ZONE B","RO ZONE C"])
+
+            paramètre[f"{unity_to_compare[i]}_{phase_traitement[unity_to_compare[i]]}"] = st.sidebar.multiselect(f"paramètres de {unity_to_compare[i]}_{phase_traitement[unity_to_compare[i]]}",
+                                                                                    data_opertionel[f"{unity_to_compare[i]}_{phase_traitement[unity_to_compare[i]]}"].columns[1:])
+        
+        col1,col2 = st.columns((2))
+        df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT.xlsx',sheet_name="UF")
+        startDate = pd.to_datetime(df["date"]).min()
+        endDate = pd.to_datetime(df["date"]).max() 
+        with col1:
+            date1 = pd.to_datetime(st.sidebar.date_input("de: ", startDate))
+
+        with col2:
+            date2 = pd.to_datetime(st.sidebar.date_input("à: ", endDate)) 
+
+        if st.sidebar.button("Apply"):
+            compar_unity_op(data_opertionel,unity_to_compare,phase_traitement,paramètre,date1,date2)
+    except Exception as e:
+        st.markdown(f"<h3 style='text-align: center;color:red;'></h3>", unsafe_allow_html=True)
+

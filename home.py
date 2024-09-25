@@ -17,33 +17,27 @@ def image_to_base64(image_path):
     img_str = base64.b64encode(buffer.getvalue()).decode()
     return img_str
 
-logo_path1 = "static/home page2.png"  
+logo_path1 = "static/home.png"  
 logo_base641 = image_to_base64(logo_path1)
 
 
 st.markdown(
     f"""
     <div style="text-align: center; padding-bottom: 40px;padding-top: 40px;">
-        <img src="data:image/png;base64,{logo_base641}" alt="Logo" width="1800">
+        <img src="data:image/png;base64,{logo_base641}" alt="Logo" width="1200">
     </div>
     """, 
     unsafe_allow_html=True
 )
 
-st.markdown(
-    """
-  <p style=" font-size: 18px; color: #555;">
-        Face à la pénurie d'eau douce qui menace de nombreuses régions, Jorf Lasfar se distingue par son initiative novatrice 
-        en matière de dessalement mobile de l'eau de mer. Grâce à des technologies avancées, cette solution permet de transformer 
-        l'eau salée en une ressource potable, tout en s'adaptant rapidement aux besoins de la communauté. L'entreprise DIPS joue un rôle clé dans ce processus, assurant un suivi rigoureux et une mise en œuvre efficace des 
-        unités de dessalement. Ces systèmes mobiles peuvent être déployés rapidement pour répondre aux exigences variées 
-        des secteurs résidentiels et agricoles, garantissant ainsi une gestion optimale des ressources en eau. En combinant expertise technique et innovation, DIPS contribue à minimiser l'impact environnemental tout en maximisant 
-        l'accès à l'eau potable. Cette démarche proactive illustre comment la technologie peut aider à relever les défis 
-        liés à l'eau, tout en soutenant le développement durable à Jorf Lasfar et au-delà. Ensemble, nous pouvons faire 
-        en sorte que chaque goutte d'eau compte.
-    </p>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+    <div style="margin-left: 150px; margin-right: 150px; text-align: justify; font-size: 20px; color: #555;">
+        <h2>Bienvenue sur l'application de dessalement d'eau de mer à Jorf Lasfar</h2>
+        <p>Cette application présente une solution innovante pour répondre aux besoins croissants en eau potable dans la région de Jorf Lasfar, où les ressources en eau douce se font rares. Grâce à la technologie de dessalement mobile, nous utilisons les vastes ressources en eau de mer de l'océan Atlantique pour fournir de l'eau potable, répondant ainsi aux besoins des populations et des industries locales.</p>
+        <p>Notre système est conçu pour être durable, efficient et respectueux de l'environnement, en optimisant l'utilisation de l'énergie et en minimisant l'impact écologique. Cette solution vise non seulement à satisfaire les besoins en eau actuels, mais aussi à anticiper les défis futurs liés aux changements climatiques et à la croissance démographique.</p>
+        <p>Grâce à l'engagement de <strong>DIPS</strong>, nous mettons en œuvre des technologies de pointe pour garantir une gestion efficace et responsable des ressources en eau. Nous nous engageons à offrir une solution flexible, mobile et adaptée aux exigences spécifiques de chaque projet, tout en maintenant les standards les plus élevés de qualité et de sécurité.</p>
+        <p>Explorez les différentes fonctionnalités de l'application pour découvrir comment nous contribuons à un avenir plus durable et comment nos solutions peuvent être adaptées à vos besoins.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 

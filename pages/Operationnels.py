@@ -12,7 +12,8 @@ from fonctions import labo_oper,labo_oper1,labo_oper2,vis_op,compare_op,compar_u
 
 
 # Titre de la page
-st.title("Pramètres de marche")
+
+st.markdown(f"<h1 style='text-align: center'>Pramètres de marche</h1>", unsafe_allow_html=True)
 
 #---------------------------------------------Chargement des données-----------------------------------------------------
 don1 = st.sidebar.radio('Visualisation:',

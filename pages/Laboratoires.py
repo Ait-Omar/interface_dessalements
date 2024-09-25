@@ -10,6 +10,7 @@ from fonctions import Visualisation_des_paramètres,Comparaison_des_phases_de_tr
 from fonctions import labo_oper,labo_oper1,labo_oper2,vis_op,compare_op,compar_unity_op,visualisation_volume,visualisation_volume_op,send_notification
 #--------------------------------------------------heradr-------------------------------------------------------------
 
+st.markdown(f"<h1 style='text-align: center'>Suivi des analyses laboratoires</h1>", unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Choisissez un fichier Excel", type=["xlsx", "xls"])
 

@@ -49,7 +49,7 @@ if don1 == "Visualisation des paramètres":
                 data_opertionel[sheet] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name=sheet)
             phase = st.sidebar.radio('Phase:',
                                     ["UF","FC","RO ZONE A","RO ZONE B","RO ZONE C"])
-            df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name="UF")
+            df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name="FC")
         
 
         col1,col2 = st.columns((2))

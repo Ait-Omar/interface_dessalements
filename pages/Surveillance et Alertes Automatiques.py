@@ -44,7 +44,7 @@ Data Science'''
 
     # Create the email message
     msg = EmailMessage()
-    msg['To'] = "aitomar.mip.97@gmail.com,quickandeasyrecips@gmail.com,abdellahsghir200@gmail.com"
+    msg['To'] = "aitomar.mip.97@gmail.com,quickandeasyrecips@gmail.com,abdellahsghir2000@gmail.com"
     msg['From'] = gmail_cfg['email']
     msg['Subject'] = f"URGENT - Alerte Dépassement des Seuils des Paramètres Critiques"
     msg.set_content(message_body)

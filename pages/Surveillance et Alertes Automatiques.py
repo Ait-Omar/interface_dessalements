@@ -44,7 +44,7 @@ Data Science'''
 
     # Create the email message
     msg = EmailMessage()
-    msg['To'] = "aitomar.mip.97@gmail.com"
+    msg['To'] = "aitomar.mip.97@gmail.com,quickandeasyrecips@gmail.com"
     msg['From'] = gmail_cfg['email']
     msg['Subject'] = f"URGENT - Alerte Dépassement des Seuils des Paramètres Critiques"
     msg.set_content(message_body)
@@ -66,10 +66,78 @@ Data Science'''
     for alert in alerts:
         os.remove(alert['graph_path'])
 
-# Define the threshold dictionary (example)
 thresholds = {
-    "QT_sortie_global": {"Cond. (mS/cm) à 25° C": 450,"Turb (NTU)": 0.1},
-     "ESLI_PERMEAT RO": {"Cond A1": 450, "Cond A2": 450,"Cond B2": 450, "Cond A4": 450},
+    "QT_sortie_global": {"Cond. (mS/cm) à 25° C": 450, "Turb (NTU)": 0.1},
+    "ESLI_PERMEAT RO": {"Cond A1": 450, "Cond A2": 450, "Cond B2": 450, "Cond A4": 450},
+    # #-----------------------------------QT-------------------------------------------------
+    # "QT_intake" : {'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
+    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+
+    # "QT_PERMEAT FILTRATION" : {'Turb (NTU)', 'SiO2 (mg/l)', 'MES (mg/l)', 'SDI 15'} ,
+
+    # "QT_APRES FILTRES A CARTOUCHE" : {'pH', 'PO43-  (mg/l)', ' ORP (mV) P1', 'ORP (mV) P2',
+    #                                    'SDI15','TDS (mg/l)'},
+
+    # "QT_PERMEAT RO" : {'Cond A', 'pH A', 'Cond B', 'pH B', 'Cond C',
+    #                     'pH C', 'Cond D','pH D', 'Cond E', 'pH E', 
+    #                     'Cond F', 'pH F', 'Cond G', 'pH G', 'Cond H','pH H'},   
+
+    # "QT_sortie_global": {'pH', 'Cond. (mS/cm) à 25° C', 'Turb (NTU)', 'TDS (mg/l)'},
+    # #-----------------------------------ION-------------------------------------------------
+    # "ION_intake" : {'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
+    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+
+    # "ION_PERMEAT FILTRATION" : {'Turb (NTU) HMMF A', 'SDI15 HMMF A', 'Turb (NTU) HMMF B',
+    #                             'SDI15 HMMF B', 'Turb (NTU) HMMF C', 'SDI15 HMMF C',
+    #                             'Turb (NTU) HMMF D', 'SDI15 HMMF D', 'Turb (NTU) HMMF E',
+    #                             'SDI15 HMMF E', 'Turb (NTU) HMMF F', 'SDI15 HMMF F',
+    #                             'Turb (NTU) HMMF G', 'SDI15 HMMF G', 'Turb (NTU) HMMF H',
+    #                             'SDI15 HMMF H', 'Turb (NTU) HMMF I', 'SDI15 HMMF I',
+    #                             'Turb (NTU) HMMF J', 'SDI15 HMMF J', 'SDI 15 Collecteur'} ,
+
+    # "QT_APRES FILTRES A CARTOUCHE" : {'ORP (mV) Collecteur A,B,C,D,E','ORP (mV) Collecteur F,G,H,I,J',
+    #                                    'SDI15 Collecteur A,B,C,D,E','SDI15 Collecteur F,G,H,I,J'},
+
+    # "ION_PERMEAT RO" : {'Cond A', 'pH A', 'Cond B', 'pH B', 'Cond C', 'pH C', 
+    #                     'Cond D','pH d ', 'Cond E', 'pH E', 'Cond F', 'pH F ',
+    #                       'Cond G', 'pH G','Cond H', ' pH H'},                                     
+    # #-----------------------------------ESLI-------------------------------------------------
+    # "ESLI_intake":{'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
+    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+
+    # "ESLI_PERMEAT FILTRATION":{'Fe2+ (mg/l) Zone A', 'Fe3+ (mg/l) Zone A', 'MES (mg/l) Zone A',
+    #                             'SDI15 Zone A', 'Fe2+ (mg/l) Zone B', 'Fe3+ (mg/l) Zone B',
+    #                             'MES (mg/l) Zone B', 'SDI15 Zone B', 'Fe2+ (mg/l) Zone C',
+    #                             'Fe3+ (mg/l) Zone C', 'MES (mg/l) Zone C', 'SDI15 Zone C'},
+
+    # "ESLI_APRES FILTRES A CARTOUCHE":{'pH ZONE A', 'T (°C)  ZONE A', 'ORP (mV)  ZONE A',
+    #                                 'SDI15  ZONE A', 'PO43-  (mg/l)  ZONE A', 'TDS (mg/l)  ZONE A',
+    #                                 'pH  ZONE B', 'T (°C) ZONE B', 'ORP (mV) ZONE B', 'SDI15 ZONE B',
+    #                                 'PO43-  (mg/l) ZONE B', 'TDS (mg/l) ZONE B', 'pH ZONE C',
+    #                                 'T (°C) ZONE C', 'ORP (mV) ZONE C', 'SDI15 ZONE C',
+    #                                 'PO43-  (mg/l) ZONE C', 'TDS (mg/l) ZONE C'},
+
+    # "ESLI_PERMEAT RO":{'Cond A1', 'Ph A1', 'Cond A2', 'Ph A2', 'Cond A3', 'Ph A3',
+    #                     'Cond A4', 'Ph A4', 'Cond B1', 'Ph B1', 'Cond B2', 'Ph b2', 'Cond B3',
+    #                     'Ph B3', 'Cond B4', 'Ph B4', 'Cond C1', 'Ph C1', 'Cond C2', 'Ph C2',
+    #                     'Cond C3', 'Ph C3', 'Cond C4', 'Ph C4'},
+    # #-----------------------------------MCT-------------------------------------------------
+    # "MCT_intake":{'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
+    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+
+    # "MCT_APRES FILTRES A CARTOUCHE":{ 'pH LIGNE 1', 'Turb (NTU) LIGNE 1', 'PO43-  (mg/l) LIGNE 1',
+    #             'ORP (mV) LIGNE 1', 'SDI15 LIGNE 1', 'TOC (mg/l) LIGNE 1',
+    #             'TDS (mg/l) LIGNE 1', 'pH LIGNE 2', 'Turb (NTU) LIGNE 2',
+    #             'PO43-   (mg/l) LIGNE 2', 'ORP (mV) LIGNE 2', 'SDI15 LIGNE 2',
+    #             'TOC (mg/l) LIGNE 2', 'TDS (mg/l) LIGNE 2', 'pH LIGNE 3',
+    #             'Turb (NTU) LIGNE 3', 'PO43-  (mg/l) LIGNE 3', 'ORP (mV) LIGNE 3',
+    #             'SDI15 LIGNE 3', 'TOC (mg/l) LIGNE 3', 'TDS (mg/l) LIGNE 3',
+    #             'pH  LIGNE 4', 'Turb (NTU) LIGNE 4', 'PO43-  (mg/l) LIGNE 4',
+    #             'ORP (mV) LIGNE 4', 'SDI15 LIGNE 4', 'TOC (mg/l) LIGNE 4',
+    #             'TDS (mg/l) LIGNE 4'},
+
+    # "MCT_PERMEAT RO":{'Cond LIGNE 1', 'pH LIGNE 1', 'Cond LIGNE 2', 'pH LIGNE 2',
+    #                  'Cond LIGNE 3', 'pH LIGNE 3', 'Cond LIGNE 4', 'pH LIGNE 4'}
 }
 
 sheets = list(thresholds.keys())
@@ -80,7 +148,7 @@ for sheet in sheets:
     data[sheet] = pd.read_excel("data/Suivi Analyse Mobile préparaé.xlsx", sheet_name=sheet)
 
 # List to hold all alerts
-alerts = []
+alerts = [] 
 
 # Iterate through each sheet and check if thresholds are exceeded
 for sheet in sheets:
@@ -150,9 +218,9 @@ if alerts:
         # Add the 'date' column to alert_data
         alert_data['date'] = [alert['date'] for alert in alerts]
 
-        # Reorder the columns if needed
+        
         alert_data = alert_data[['unité', 'phase de traitement', 'param', 'value', 'threshold', 'date']]
-
+        # alert_data.set_index('date', inplace=True)
         st.table(alert_data)
     
     # Bouton d'envoi de notification avec spinner et style

@@ -110,7 +110,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
-
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Turb (NTU) moyenne: {np.around(df['Turb (NTU)'].mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y="Turb (NTU)")
@@ -177,6 +177,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df['TOC (mg/l)'] = df['TOC (mg/l)'].astype(float)
         df.loc[df['TOC (mg/l)'] < 3, 'TOC (mg/l)'] = 1
         df.loc[df['TOC (mg/l)'] > 3, 'TOC (mg/l)'] = 0
+        print(df.columns)      
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>pH moyenne: {np.around(df['pH'].mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y="pH")
@@ -294,6 +295,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df.replace('/', np.nan, inplace=True)
         df.replace('#VALEUR!', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)    
         with col1:
             st.markdown(F"<h2 style='text-align: center;'>Cond A moyen en (mS/cm): {np.around(df['Cond A'].mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Cond A')
@@ -525,7 +527,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
-
+        print(df.columns)  
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>pH moyen: {np.around(df['pH'].mean(),2)}</h2>", unsafe_allow_html=True)        
             fig = px.line(df,x="date",y="pH")
@@ -716,6 +718,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns) 
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Fe2+ (mg/l) Zone A  moyen : {np.around(df['Fe2+ (mg/l) Zone A'].mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Fe2+ (mg/l) Zone A')
@@ -889,20 +892,10 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
     elif (unity == "ESLI") & (phase =="APRES FILTRES A CARTOUCHE"):
         df = pd.read_excel(df,sheet_name="ESLI_APRES FILTRES A CARTOUCHE")
         col1,col2 = st.columns((2))
-        # df['date'] = pd.to_datetime(df['date'])
-
-        # startDate = pd.to_datetime(df["date"]).min()
-        # endDate = pd.to_datetime(df["date"]).max()
-
-        # with col1:
-        #     date1 = pd.to_datetime(st.date_input("Start Date", startDate))
-
-        # with col2:
-        #     date2 = pd.to_datetime(st.date_input("End Date", endDate))
-
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>pH ZONE A moyen : {np.around(pd.to_numeric(df['pH ZONE A'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='pH ZONE A')
@@ -1130,6 +1123,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df.replace('/', np.nan, inplace=True)
         df.replace('#VALEUR!', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Cond A1 moyen : {np.around(pd.to_numeric(df['Cond A1'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Cond A1')
@@ -1592,6 +1586,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Turb (NTU) HMMF A moyen : {np.around(pd.to_numeric(df['Turb (NTU) HMMF A'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Turb (NTU) HMMF A')
@@ -1890,16 +1885,6 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df = pd.read_excel(df,sheet_name="ION_Bac_stockage")
         # print(df.columns)
         col1,col2 = st.columns((2))
-        # df['date'] = pd.to_datetime(df['date'])
-
-        # startDate = pd.to_datetime(df["date"]).min()
-        # endDate = pd.to_datetime(df["date"]).max()
-
-        # with col1:
-        #     date1 = pd.to_datetime(st.date_input("Start Date", startDate))
-
-        # with col2:
-        #     date2 = pd.to_datetime(st.date_input("End Date", endDate))
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
@@ -1907,6 +1892,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df['TOC (mg/l)'] = df['TOC (mg/l)'].astype(float)
         df.loc[df['TOC (mg/l)'] < 3, 'TOC (mg/l)'] = 1
         df.loc[df['TOC (mg/l)'] > 3, 'TOC (mg/l)'] = 0
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>pH moyen : {np.around(pd.to_numeric(df['pH'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='pH')
@@ -1950,20 +1936,11 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
     elif (unity == "ION EXCHANGE") & (phase =="APRES FILTRES A CARTOUCHE"):
         df = pd.read_excel(df,sheet_name="ION_APRES FILTRES A CARTOUCHE")
         col1,col2 = st.columns((2))
-        # df['date'] = pd.to_datetime(df['date'])
-
-        # startDate = pd.to_datetime(df["date"]).min()
-        # endDate = pd.to_datetime(df["date"]).max()
-
-        # with col1:
-        #     date1 = pd.to_datetime(st.date_input("Start Date", startDate))
-
-        # with col2:
-        #     date2 = pd.to_datetime(st.date_input("End Date", endDate))
 
         df = df[(df["date"] >= date1) & (df["date"] <= date2)]
         df.replace('/', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>ORP (mV) Collecteur A,B,C,D,E moyen : {np.around(pd.to_numeric(df['ORP (mV) Collecteur A,B,C,D,E'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='ORP (mV) Collecteur A,B,C,D,E')
@@ -2047,6 +2024,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df.replace('/', np.nan, inplace=True)
         df.replace('#VALEUR!', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Cond A moyen : {np.around(pd.to_numeric(df['Cond A'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Cond A')
@@ -2392,6 +2370,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df['TOC (mg/l) LIGNE 4'] = df['TOC (mg/l) LIGNE 4'].astype(float)
         df.loc[df['TOC (mg/l) LIGNE 4'] < 3, 'TOC (mg/l) LIGNE 4'] = 1
         df.loc[df['TOC (mg/l) LIGNE 4'] > 3, 'TOC (mg/l) LIGNE 4'] = 0
+        print(df.columns)
     #LIGNE 1
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>pH LIGNE 1 moyen: {np.around(df['pH LIGNE 1'].mean(),2)}</h2>", unsafe_allow_html=True)
@@ -2795,6 +2774,7 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
         df.replace('/', np.nan, inplace=True)
         df.replace('#VALEUR!', np.nan, inplace=True)
         df.replace('en cours', np.nan, inplace=True)
+        print(df.columns)
         with col1:
             st.markdown(f"<h2 style='text-align: center;'>Cond LIGNE 1 moyen: {np.around(pd.to_numeric(df['Cond LIGNE 1'], errors='coerce').mean(),2)}</h2>", unsafe_allow_html=True)
             fig = px.line(df,x="date",y='Cond LIGNE 1')

@@ -35,8 +35,8 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
             fig = px.line(df,x="date",y="Turb (NTU)")
             st.plotly_chart(fig,use_container_width=True,height = 200)
         with col1:
-            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43- (mg/l)'].mean(),2)}</h2>", unsafe_allow_html=True)        
-            fig = px.line(df,x="date",y="PO43- (mg/l)")
+            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43-'].mean(),2)}</h2>", unsafe_allow_html=True)        
+            fig = px.line(df,x="date",y="PO43-")
             fig.add_hline(y=0.1, line_dash="dash", line_color="red", line_width=2)
             fig.add_annotation(
                     x=df['date'].iloc[-1], 
@@ -625,8 +625,8 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
             #     )
             st.plotly_chart(fig,use_container_width=True,height = 200)
         with col1:
-            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43- (mg/l)'].mean(),2)}</h2>", unsafe_allow_html=True)        
-            fig = px.line(df,x="date",y="PO43- (mg/l)")
+            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43-'].mean(),2)}</h2>", unsafe_allow_html=True)        
+            fig = px.line(df,x="date",y="PO43-")
             fig.add_hline(y=0.1, line_dash="dash", line_color="red", line_width=2)
             fig.add_annotation(
                     x=df['date'].iloc[-1],  # Position X (la dernière date dans ce cas)
@@ -1502,8 +1502,8 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
             #     )
             st.plotly_chart(fig,use_container_width=True,height = 200)
         with col1:
-            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43- (mg/l)'].mean(),2)}</h2>", unsafe_allow_html=True)        
-            fig = px.line(df,x="date",y="PO43- (mg/l)")
+            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43-'].mean(),2)}</h2>", unsafe_allow_html=True)        
+            fig = px.line(df,x="date",y="PO43-")
             fig.add_hline(y=0.1, line_dash="dash", line_color="red", line_width=2)
             fig.add_annotation(
                     x=df['date'].iloc[-1],  # Position X (la dernière date dans ce cas)
@@ -2272,8 +2272,8 @@ def Visualisation_des_paramètres(df,unity,phase,date1,date2):
             fig = px.line(df,x="date",y="Turb (NTU)")
             st.plotly_chart(fig,use_container_width=True,height = 200)
         with col1:
-            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43- (mg/l)'].mean(),2)}</h2>", unsafe_allow_html=True)        
-            fig = px.line(df,x="date",y="PO43- (mg/l)")
+            st.markdown(f"<h2 style='text-align: center;'>PO43- (mg/l) moyen: {np.around(df['PO43-'].mean(),2)}</h2>", unsafe_allow_html=True)        
+            fig = px.line(df,x="date",y="PO43-")
             fig.add_hline(y=0.1, line_dash="dash", line_color="red", line_width=2)
             fig.add_annotation(
                     x=df['date'].iloc[-1],  # Position X (la dernière date dans ce cas)

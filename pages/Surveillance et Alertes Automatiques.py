@@ -67,77 +67,76 @@ Data Science'''
         os.remove(alert['graph_path'])
 
 thresholds = {
-    "QT_sortie_global": {"Cond. (mS/cm) à 25° C": 450, "Turb (NTU)": 0.1},
-    "ESLI_PERMEAT RO": {"Cond A1": 450, "Cond A2": 450, "Cond B2": 450, "Cond A4": 450},
-    # #-----------------------------------QT-------------------------------------------------
-    # "QT_intake" : {'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
-    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+    # "QT_sortie_global": {"Cond. (mS/cm) à 25° C": 450, "Turb (NTU)": 0.1},
+    # "ESLI_PERMEAT RO": {"Cond A1": 450, "Cond A2": 450, "Cond B2": 450, "Cond A4": 450},
+#-----------------------------------QT-------------------------------------------------
+    "QT_intake" : {'Cond. (mS/cm) à 25° C':55, 'pH':8.5, 'Turb (NTU)':5.13, 
+                   'MES  (mg/l)':10,'TDS (mg/l)':40000},
 
-    # "QT_PERMEAT FILTRATION" : {'Turb (NTU)', 'SiO2 (mg/l)', 'MES (mg/l)', 'SDI 15'} ,
+    "QT_PERMEAT FILTRATION" : {'Turb (NTU)':0.1, 'SDI 15':2.5} ,
 
-    # "QT_APRES FILTRES A CARTOUCHE" : {'pH', 'PO43-  (mg/l)', ' ORP (mV) P1', 'ORP (mV) P2',
-    #                                    'SDI15','TDS (mg/l)'},
+    "QT_APRES FILTRES A CARTOUCHE" : {  ' ORP (mV) P1':300, 'ORP (mV) P2':300,
+                                       'SDI15':2.5,'TDS (mg/l)':40000},
 
-    # "QT_PERMEAT RO" : {'Cond A', 'pH A', 'Cond B', 'pH B', 'Cond C',
-    #                     'pH C', 'Cond D','pH D', 'Cond E', 'pH E', 
-    #                     'Cond F', 'pH F', 'Cond G', 'pH G', 'Cond H','pH H'},   
+    "QT_PERMEAT RO" : {'Cond A':450,  'Cond B':450,  'Cond C':450,
+                         'Cond D':450, 'Cond E':450,  
+                        'Cond F':450, 'Cond G':450, 'Cond H':450},   
 
-    # "QT_sortie_global": {'pH', 'Cond. (mS/cm) à 25° C', 'Turb (NTU)', 'TDS (mg/l)'},
-    # #-----------------------------------ION-------------------------------------------------
-    # "ION_intake" : {'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
-    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+    "QT_sortie_global": {'Cond. (mS/cm) à 25° C':450, 'Turb (NTU)':0.1, 'TDS (mg/l)':310},
+#-----------------------------------ION-------------------------------------------------
+    # "ION_intake" : {'Cond. (mS/cm) à 25° C':55, 'pH':8.5, 'Turb (NTU)':5.13, 
+    #                'PO43- (mg/l)':0.1,'SiO2 (mg/l)':0.3,'MES  (mg/l)':10,'TDS (mg/l)':40000},
 
-    # "ION_PERMEAT FILTRATION" : {'Turb (NTU) HMMF A', 'SDI15 HMMF A', 'Turb (NTU) HMMF B',
-    #                             'SDI15 HMMF B', 'Turb (NTU) HMMF C', 'SDI15 HMMF C',
-    #                             'Turb (NTU) HMMF D', 'SDI15 HMMF D', 'Turb (NTU) HMMF E',
-    #                             'SDI15 HMMF E', 'Turb (NTU) HMMF F', 'SDI15 HMMF F',
-    #                             'Turb (NTU) HMMF G', 'SDI15 HMMF G', 'Turb (NTU) HMMF H',
-    #                             'SDI15 HMMF H', 'Turb (NTU) HMMF I', 'SDI15 HMMF I',
-    #                             'Turb (NTU) HMMF J', 'SDI15 HMMF J', 'SDI 15 Collecteur'} ,
+    "ION_PERMEAT FILTRATION" : {'Turb (NTU) HMMF A':0.1, 'SDI15 HMMF A':5, 'Turb (NTU) HMMF B':0.1,
+                                'SDI15 HMMF B':5, 'Turb (NTU) HMMF C':0.1, 'SDI15 HMMF C':5,
+                                'Turb (NTU) HMMF D':5, 'SDI15 HMMF D':5, 'Turb (NTU) HMMF E':0.1,
+                                'SDI15 HMMF E':5, 'Turb (NTU) HMMF F':0.1, 'SDI15 HMMF F':5,
+                                'Turb (NTU) HMMF G':0.1, 'SDI15 HMMF G':5, 'Turb (NTU) HMMF H':0.1,
+                                'SDI15 HMMF H':5, 'Turb (NTU) HMMF I':0.1, 'SDI15 HMMF I':5,
+                                'Turb (NTU) HMMF J':0.1, 'SDI15 HMMF J':5, 'SDI 15 Collecteur':5} ,
 
-    # "QT_APRES FILTRES A CARTOUCHE" : {'ORP (mV) Collecteur A,B,C,D,E','ORP (mV) Collecteur F,G,H,I,J',
-    #                                    'SDI15 Collecteur A,B,C,D,E','SDI15 Collecteur F,G,H,I,J'},
+    # "QT_APRES FILTRES A CARTOUCHE" : {'ORP (mV) Collecteur A,B,C,D,E':300,'ORP (mV) Collecteur F,G,H,I,J':300,
+    #                                    'SDI15 Collecteur A,B,C,D,E':5,'SDI15 Collecteur F,G,H,I,J':5},
 
-    # "ION_PERMEAT RO" : {'Cond A', 'pH A', 'Cond B', 'pH B', 'Cond C', 'pH C', 
-    #                     'Cond D','pH d ', 'Cond E', 'pH E', 'Cond F', 'pH F ',
-    #                       'Cond G', 'pH G','Cond H', ' pH H'},                                     
-    # #-----------------------------------ESLI-------------------------------------------------
-    # "ESLI_intake":{'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
-    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+    "ION_PERMEAT RO" : {'Cond A':450,  'Cond B':450, 'Cond C':450, 
+                        'Cond D':450, 'Cond E':450,  'Cond F':450, 
+                          'Cond G':450, 'Cond H':450},                                     
+ #-----------------------------------ESLI-------------------------------------------------
+    # "ESLI_intake":{'Cond. (mS/cm) à 25° C':55, 'pH':8.5, 'Turb (NTU)':5.13, 
+    #                'PO43- (mg/l)':0.1,'SiO2 (mg/l)':0.3,'MES  (mg/l)':10,'TDS (mg/l)':40000},
 
-    # "ESLI_PERMEAT FILTRATION":{'Fe2+ (mg/l) Zone A', 'Fe3+ (mg/l) Zone A', 'MES (mg/l) Zone A',
-    #                             'SDI15 Zone A', 'Fe2+ (mg/l) Zone B', 'Fe3+ (mg/l) Zone B',
-    #                             'MES (mg/l) Zone B', 'SDI15 Zone B', 'Fe2+ (mg/l) Zone C',
-    #                             'Fe3+ (mg/l) Zone C', 'MES (mg/l) Zone C', 'SDI15 Zone C'},
+    "ESLI_PERMEAT FILTRATION":{'Fe2+ (mg/l) Zone A':0.2, 'Fe3+ (mg/l) Zone A':0.2, 'MES (mg/l) Zone A':0.1,
+                                'SDI15 Zone A':2.5, 'Fe2+ (mg/l) Zone B':0.2, 'Fe3+ (mg/l) Zone B':0.2,
+                                'MES (mg/l) Zone B':0.1, 'SDI15 Zone B':2.5, 'Fe2+ (mg/l) Zone C':0.2,
+                                'Fe3+ (mg/l) Zone C':0.2, 'MES (mg/l) Zone C':0.1, 'SDI15 Zone C':2.5},
 
-    # "ESLI_APRES FILTRES A CARTOUCHE":{'pH ZONE A', 'T (°C)  ZONE A', 'ORP (mV)  ZONE A',
-    #                                 'SDI15  ZONE A', 'PO43-  (mg/l)  ZONE A', 'TDS (mg/l)  ZONE A',
-    #                                 'pH  ZONE B', 'T (°C) ZONE B', 'ORP (mV) ZONE B', 'SDI15 ZONE B',
-    #                                 'PO43-  (mg/l) ZONE B', 'TDS (mg/l) ZONE B', 'pH ZONE C',
-    #                                 'T (°C) ZONE C', 'ORP (mV) ZONE C', 'SDI15 ZONE C',
-    #                                 'PO43-  (mg/l) ZONE C', 'TDS (mg/l) ZONE C'},
+    "ESLI_APRES FILTRES A CARTOUCHE":{'ORP (mV)  ZONE A':300,
+                                    'SDI15  ZONE A':2.5, 'TDS (mg/l)  ZONE A':40000,
+                                     'ORP (mV) ZONE B':300, 'SDI15 ZONE B':2.5,
+                                     'TDS (mg/l) ZONE B':40000,
+                                     'ORP (mV) ZONE C':300, 'SDI15 ZONE C':2.5
+                                    , 'TDS (mg/l) ZONE C':300},
 
-    # "ESLI_PERMEAT RO":{'Cond A1', 'Ph A1', 'Cond A2', 'Ph A2', 'Cond A3', 'Ph A3',
-    #                     'Cond A4', 'Ph A4', 'Cond B1', 'Ph B1', 'Cond B2', 'Ph b2', 'Cond B3',
-    #                     'Ph B3', 'Cond B4', 'Ph B4', 'Cond C1', 'Ph C1', 'Cond C2', 'Ph C2',
-    #                     'Cond C3', 'Ph C3', 'Cond C4', 'Ph C4'},
-    # #-----------------------------------MCT-------------------------------------------------
-    # "MCT_intake":{'Cond. (mS/cm) à 25° C', 'pH', 'Turb (NTU)', 
-    #                'PO43- (mg/l)','SiO2 (mg/l)','MES  (mg/l)','TDS (mg/l)'},
+    "ESLI_PERMEAT RO":{'Cond A1':450, 'Cond A2':450,  'Cond A3':450, 
+                        'Cond A4':450,  'Cond B1':450,'Cond B2':450,  'Cond B3':450,
+                         'Cond B4':450,  'Cond C1':450, 'Cond C2':450, 
+                        'Cond C3':450,  'Cond C4':450},
+#-----------------------------------MCT-------------------------------------------------
+    # "MCT_intake":{'Cond. (mS/cm) à 25° C':55, 'pH':8.5, 'Turb (NTU)':5.13, 
+    #                'PO43- (mg/l)':0.1,'SiO2 (mg/l)':0.3,'MES  (mg/l)':10,'TDS (mg/l)':40000},
 
-    # "MCT_APRES FILTRES A CARTOUCHE":{ 'pH LIGNE 1', 'Turb (NTU) LIGNE 1', 'PO43-  (mg/l) LIGNE 1',
-    #             'ORP (mV) LIGNE 1', 'SDI15 LIGNE 1', 'TOC (mg/l) LIGNE 1',
-    #             'TDS (mg/l) LIGNE 1', 'pH LIGNE 2', 'Turb (NTU) LIGNE 2',
-    #             'PO43-   (mg/l) LIGNE 2', 'ORP (mV) LIGNE 2', 'SDI15 LIGNE 2',
-    #             'TOC (mg/l) LIGNE 2', 'TDS (mg/l) LIGNE 2', 'pH LIGNE 3',
-    #             'Turb (NTU) LIGNE 3', 'PO43-  (mg/l) LIGNE 3', 'ORP (mV) LIGNE 3',
-    #             'SDI15 LIGNE 3', 'TOC (mg/l) LIGNE 3', 'TDS (mg/l) LIGNE 3',
-    #             'pH  LIGNE 4', 'Turb (NTU) LIGNE 4', 'PO43-  (mg/l) LIGNE 4',
-    #             'ORP (mV) LIGNE 4', 'SDI15 LIGNE 4', 'TOC (mg/l) LIGNE 4',
-    #             'TDS (mg/l) LIGNE 4'},
+    "MCT_APRES FILTRES A CARTOUCHE":{  'Turb (NTU) LIGNE 1':0.1,
+                'ORP (mV) LIGNE 1':300, 'SDI15 LIGNE 1':2.5, 
+                'TDS (mg/l) LIGNE 1':40000, 'Turb (NTU) LIGNE 2':0.1,'ORP (mV) LIGNE 2':300, 'SDI15 LIGNE 2':2.5,
+                 'TDS (mg/l) LIGNE 2':40000,
+                'Turb (NTU) LIGNE 3':0.1,'ORP (mV) LIGNE 3':300,
+                'SDI15 LIGNE 3':2.5, 'TDS (mg/l) LIGNE 3':40000,
+                'Turb (NTU) LIGNE 4':0.1,
+                'ORP (mV) LIGNE 4':300, 'SDI15 LIGNE 4':2.5,
+                'TDS (mg/l) LIGNE 4':40000},
 
-    # "MCT_PERMEAT RO":{'Cond LIGNE 1', 'pH LIGNE 1', 'Cond LIGNE 2', 'pH LIGNE 2',
-    #                  'Cond LIGNE 3', 'pH LIGNE 3', 'Cond LIGNE 4', 'pH LIGNE 4'}
+    "MCT_PERMEAT RO":{'Cond LIGNE 1':450,  'Cond LIGNE 2':450,
+                     'Cond LIGNE 3':450,  'Cond LIGNE 4':450}
 }
 
 sheets = list(thresholds.keys())
@@ -193,11 +192,11 @@ for sheet in sheets:
                 })
 
 # Display the title and section in Streamlit
-st.markdown("<h1 style='text-align: center; color: blue;'>💧 Surveillance et Alertes Automatiques des Paramètres de Qualité de l'eau 💧</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: blue;'>💧 Surveillance et Alertes Automatiques des Paramètres de Qualité de l'eau 💧</h2>", unsafe_allow_html=True)
 
 # Display alert messages with dates
 if alerts:
-    st.markdown("<h2 style='color: red; text-align: center;'>⚠️ Attention : Dépassement de seuil détecté ! ⚠️</h2>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: red; text-align: center;'>⚠️ Attention : Dépassement de seuil détecté ! ⚠️</h3>", unsafe_allow_html=True)
     st.write("Veuillez consulter les détails des alertes ci-dessous et agir rapidement pour rectifier les anomalies.")
 
     # Display the date of exceedance for each alert

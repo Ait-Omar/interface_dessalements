@@ -44,17 +44,17 @@ Data Science'''
 
     # Create the email message
     msg = EmailMessage()
-    msg['To'] = "aitomar.mip.97@gmail.com,quickandeasyrecips@gmail.com,abdellahsghir2000@gmail.com"
+    msg['To'] = "aitomar.mip.97@gmail.com"
     msg['From'] = gmail_cfg['email']
     msg['Subject'] = f"URGENT - Alerte Dépassement des Seuils des Paramètres Critiques"
     msg.set_content(message_body)
 
     # Attach all the images to the email
-    for alert in alerts:
-        with open(alert['graph_path'], 'rb') as f:
-            file_data = f.read()
-            file_name = f.name
-            msg.add_attachment(file_data, maintype='image', subtype='png', filename=file_name)
+    # for alert in alerts:
+    #     with open(alert['graph_path'], 'rb') as f:
+    #         file_data = f.read()
+    #         file_name = f.name
+    #         msg.add_attachment(file_data, maintype='image', subtype='png', filename=file_name)
     
     # Send the email
     with smtplib.SMTP_SSL(gmail_cfg['serveur'], gmail_cfg['port']) as smtp:
@@ -62,9 +62,9 @@ Data Science'''
         smtp.send_message(msg)
     st.success("Notification envoyée avec succès!")
 
-    # Delete the images after sending
-    for alert in alerts:
-        os.remove(alert['graph_path'])
+    # # Delete the images after sending
+    # for alert in alerts:
+    #     os.remove(alert['graph_path'])
 
 thresholds = {
     # "QT_sortie_global": {"Cond. (mS/cm) à 25° C": 450, "Turb (NTU)": 0.1},
@@ -165,21 +165,21 @@ for sheet in sheets:
                 date_depassement_str = pd.to_datetime(date_depassement).strftime("%d/%m/%Y")
 
                 # Generate the graph
-                fig = px.line(df, x="date", y=param)
-                fig.add_hline(y=seuil, line_dash="dash", line_color="red", line_width=2)
-                fig.add_annotation(
-                    x=df['date'].iloc[-1],
-                    y=seuil,
-                    text=f"{param} doit être inférieur ou égal à {seuil}",
-                    showarrow=True,
-                    arrowhead=2,
-                    ax=0,
-                    ay=-40
-                )
+                # fig = px.line(df, x="date", y=param)
+                # fig.add_hline(y=seuil, line_dash="dash", line_color="red", line_width=2)
+                # fig.add_annotation(
+                #     x=df['date'].iloc[-1],
+                #     y=seuil,
+                #     text=f"{param} doit être inférieur ou égal à {seuil}",
+                #     showarrow=True,
+                #     arrowhead=2,
+                #     ax=0,
+                #     ay=-40
+                # )
 
-                # Save the graph as an image
-                file_path = f'graph_{sheet}_{param}.png'
-                pio.write_image(fig, file_path)
+                # # Save the graph as an image
+                # file_path = f'graph_{sheet}_{param}.png'
+                # pio.write_image(fig, file_path)
 
                 # Add the alert to the list
                 alerts.append({
@@ -187,7 +187,7 @@ for sheet in sheets:
                     "param": param,
                     "value": valeur_actuelle,
                     "threshold": seuil,
-                    "graph_path": file_path,
+                    # "graph_path": file_path,
                     "date": date_depassement_str
                 })
 

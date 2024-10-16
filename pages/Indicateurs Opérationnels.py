@@ -31,16 +31,18 @@ if don1 == "Visualisation des paramètres":
     data_opertionel = {}
     try:
         if (unity == "MCT"):
+            sheets =["UF","FC","RO"]
             data_opertionel["tr"] = pd.read_excel('data/SUIVI DP et Q et CIP des RO  MCT.xlsx',sheet_name="tr")
             phase = st.sidebar.radio('Phase:',
                                     ["tr"])
             df = pd.read_excel('data/SUIVI DP et Q et CIP des RO  MCT.xlsx',sheet_name="tr")
         elif  (unity == "QT"):
-            sheets =["UF","FC","RO"]
+            sheets =["UF","RO"]
             for sheet in sheets:
                 data_opertionel[sheet] = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT.xlsx',sheet_name=sheet)
+
             phase = st.sidebar.radio('Phase:',
-                                    ["UF","FC","RO"]
+                                    ["UF","RO"]
                                     )
             df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement QT.xlsx',sheet_name="UF")
         elif(unity == "ESLI"):
@@ -51,7 +53,6 @@ if don1 == "Visualisation des paramètres":
                                     ["UF","FC","RO ZONE A","RO ZONE B","RO ZONE C"])
             df = pd.read_excel('data/Suivi contrôle qualité d\'eau de dessalement ESLI.xlsx',sheet_name="FC")
         
-
         col1,col2 = st.columns((2))
 
         startDate = pd.to_datetime(df["date"]).min()

@@ -105,10 +105,12 @@ thresholds = {
     # "ESLI_intake":{'Cond. (mS/cm) à 25° C':55, 'pH':8.5, 'Turb (NTU)':5.13, 
     #                'PO43- (mg/l)':0.1,'SiO2 (mg/l)':0.3,'MES  (mg/l)':10,'TDS (mg/l)':40000},
 
-    "ESLI_PERMEAT FILTRATION":{'Fe2+ (mg/l) Zone A':0.2, 'Fe3+ (mg/l) Zone A':0.2, 'MES (mg/l) Zone A':0.1,
-                                'SDI15 Zone A':2.5, 'Fe2+ (mg/l) Zone B':0.2, 'Fe3+ (mg/l) Zone B':0.2,
-                                'MES (mg/l) Zone B':0.1, 'SDI15 Zone B':2.5, 'Fe2+ (mg/l) Zone C':0.2,
-                                'Fe3+ (mg/l) Zone C':0.2, 'MES (mg/l) Zone C':0.1, 'SDI15 Zone C':2.5},
+    "ESLI_PERMEAT FILTRATION":{'Fe2+ (mg/l) Zone A':0.2, 'Fe3+ (mg/l) Zone A':0.2, 
+                               'MES (mg/l) Zone A':0.1,'SDI15 Zone A':2.5,
+                               'Fe2+ (mg/l) Zone B':0.2, 'Fe3+ (mg/l) Zone B':0.2,
+                                'MES (mg/l) Zone B':0.1, 'SDI15 Zone B':2.5, 
+                                'Fe2+ (mg/l) Zone C':0.2,'Fe3+ (mg/l) Zone C':0.2,
+                                'MES (mg/l) Zone C':0.1, 'SDI15 Zone C':2.5},
 
     "ESLI_APRES FILTRES A CARTOUCHE":{'ORP (mV)  ZONE A':300,
                                     'SDI15  ZONE A':2.5, 'TDS (mg/l)  ZONE A':40000,
@@ -127,11 +129,11 @@ thresholds = {
 
     "MCT_APRES FILTRES A CARTOUCHE":{  'Turb (NTU) LIGNE 1':0.1,
                 'ORP (mV) LIGNE 1':300, 'SDI15 LIGNE 1':2.5, 
-                'TDS (mg/l) LIGNE 1':40000, 'Turb (NTU) LIGNE 2':0.1,'ORP (mV) LIGNE 2':300, 'SDI15 LIGNE 2':2.5,
-                 'TDS (mg/l) LIGNE 2':40000,
-                'Turb (NTU) LIGNE 3':0.1,'ORP (mV) LIGNE 3':300,
-                'SDI15 LIGNE 3':2.5, 'TDS (mg/l) LIGNE 3':40000,
-                'Turb (NTU) LIGNE 4':0.1,
+                'TDS (mg/l) LIGNE 1':40000, 'Turb (NTU) LIGNE 2':0.1,
+                'ORP (mV) LIGNE 2':300, 'SDI15 LIGNE 2':2.5,
+                'TDS (mg/l) LIGNE 2':40000, 'Turb (NTU) LIGNE 3':0.1,
+                'ORP (mV) LIGNE 3':300,'SDI15 LIGNE 3':2.5,
+                'TDS (mg/l) LIGNE 3':40000,'Turb (NTU) LIGNE 4':0.1,
                 'ORP (mV) LIGNE 4':300, 'SDI15 LIGNE 4':2.5,
                 'TDS (mg/l) LIGNE 4':40000},
 
